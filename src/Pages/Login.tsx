@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import '../App.css'
 import Input from "../Components/Input";
 import Button from "../Components/Button";
+import '../Css/Login.css'
 
 const Login: FC = () => {
     const [userName, setUserName] = useState<string>('');

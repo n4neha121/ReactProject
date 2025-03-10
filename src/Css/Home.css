@@ -1,0 +1,48 @@
+.headerbg {
+    position: fixed;
+    /* Keeps it at the top */
+    top: 0;
+    /* Positions it at the very top */
+    left: 0;
+    width: 100%;
+    /* Full width */
+    background-color: #333;
+    /* Dark background for contrast */
+    color: white;
+    /* Text color */
+    text-align: center;
+    padding: 8px 0;
+    /* Top and bottom padding */
+    font-size: 18px;
+    font-family: sans-serif;
+    /* z-index: 1000; */
+    /* Ensures it stays on top of other content */
+    flex-direction: row;
+    justify-content: space-between;
+    display: flex;
+}
+
+#topic {
+    width: 200px;
+    align-items: flex-start;
+    display: flex;
+    padding-left:25px;
+    /* flex: 1; */
+    /* background-color: red; */
+}
+
+#headerList {
+    flex-direction: row;
+    justify-content: space-between;
+    display: flex;
+    gap: 20px;
+    white-space: nowrap;
+    padding-right: 30px;
+    padding-top: 8px;
+    /* background-color: green; */
+}
+.button2{
+    height: 12px;
+    background-color: aliceblue;
+    width: 75px;
+}
