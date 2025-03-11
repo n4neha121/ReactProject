@@ -1,46 +1,57 @@
 import { FC, useState } from "react";
-import "../Css/Home.css"
+import "../Css/Home.css";
 import { COLORS } from "../Constants/Colors";
+import { useNavigate } from "react-router-dom";
 
 const Home: FC = () => {
-    const [isHover, setIsHover] = useState(false);
+    const navigate = useNavigate();
 
-    const menuItems = [{
-        text: 'Forums',
-    },
-    { text: 'Start Selling' }, {
-        text: 'Our Products'
-    }, {
-        text: 'Sign In'
-    }]
+    const [isHover, setIsHover] = useState<string | null>(null);
+
+    const menuItems = [
+        { text: "Forums", navigation: '/Forum' },
+        { text: "Start Selling", navigation: '/Selling' },
+        { text: "Our Products", navigation: '/Product' },
+        { text: "Sign In", navigation: '/Login' }
+    ];
+
     return (
         <div>
             <div className="headerbg">
                 <div id="topic">
-                    <span color={{color: COLORS.Light}}>OnlineMarket</span>
+                    <h1 style={{ color: COLORS.Light, fontSize: '20px' }}>OnlineMarket</h1>
                 </div>
                 <div id="headerList">
                     {menuItems.map((item) => (
                         <button
-                            key={item}
+                            key={item.text}
                             className="button2"
-                            onMouseEnter={() => setIsHover(item)}
+                            onMouseEnter={() => {
+                                console.log('Hover Event:', item.text);
+                                setIsHover(item.text)
+                            }}
                             onMouseLeave={() => setIsHover(null)}
+                            onClick={() => {
+                                console.log('navigate to ::', item.navigation);
+                                navigate(item?.navigation)
+                            }}
                         >
-                            <span
+                            <p
                                 style={{
-                                    color: isHover === item ? COLORS.Light : COLORS.InActiveBtn,
+                                    color: isHover === item.text ? COLORS.Dark : COLORS.InActiveBtn,
                                     fontFamily: "sans-serif",
-                                    fontSize: "15px",
+                                    fontSize: "13.5px",
+                                    fontWeight: 'bold'
                                 }}
                             >
-                                {item}
-                            </span>
+                                {item.text}
+                            </p>
                         </button>
                     ))}
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
+
 export default Home;
