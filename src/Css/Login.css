@@ -1,62 +1,62 @@
 #login {
-    align-items: center;
-    /* Aligns items vertically */
-    justify-content: center;
-    /* Aligns items horizontally */
-    display: flex;
-    height: 100vh;
-    /* Full page height */
-    flex-direction: column;
-    /* Align items i*/
-  }
-  
-  .h1 {
-    font-family: serif;
-    font-size: 30px;
-    color: black;
-  }
-  
-  /*INPUT COMPONENT STYLES*/
-  .Input-box-background {
-    width: 100%;
-    /* Full-width */
-    max-width: 400px;
-    /* Set a reasonable max width */
-    height: 45px;
-    padding: 5px;
-    /* Comfortable padding */
-    font-size: 16px;
-    /* Readable text */
-    border: 2px solid #000;
-    /* Default border */
-    border-radius: 8px;
-    /* Smooth rounded corners */
-    outline: none;
-    /* Remove default focus outline */
-    /* transition: all 0.3s ease-in-out;/ */
-  }
-  
-  .button {
-    height: 55px;
-    width: 320px;
-    display: flex;
-    /* Needed for align-items & justify-content */
-    align-items: center;
-    /* Centers text vertically */
-    justify-content: center;
-    /* Centers text horizontally */
-    background-color: #000;
-    /* Black background */
-    border-radius: 15px;
-    /* Rounded corners */
-    font-family: 'sans-serif';
-    font-size: 20px;
-    color: #ffffff;
-    /* White text */
-    border: none;
-    /* Removes default button border */
-    cursor: pointer;
-    /* Changes cursor on hover */
-    transition: 0.3s ease-in-out;
-    /* Smooth hover effect */
-  }
+  align-items: center;
+  /* Aligns items vertically */
+  justify-content: center;
+  /* Aligns items horizontally */
+  display: flex;
+  height: 100vh;
+  /* Full page height */
+  flex-direction: column;
+  /* Align items i*/
+}
+
+.h1 {
+  font-family: serif;
+  font-size: 30px;
+  color: black;
+}
+
+/*INPUT COMPONENT STYLES*/
+.Input-box-background {
+  width: 100%;
+  /* Full-width */
+  max-width: 400px;
+  /* Set a reasonable max width */
+  height: 45px;
+  padding: 5px;
+  /* Comfortable padding */
+  font-size: 16px;
+  /* Readable text */
+  border: 2px solid #000;
+  /* Default border */
+  border-radius: 8px;
+  /* Smooth rounded corners */
+  outline: none;
+  /* Remove default focus outline */
+  /* transition: all 0.3s ease-in-out;/ */
+}
+
+.button {
+  height: 55px;
+  width: 320px;
+  display: flex;
+  /* Needed for align-items & justify-content */
+  align-items: center;
+  /* Centers text vertically */
+  justify-content: center;
+  /* Centers text horizontally */
+  background-color: #000;
+  /* Black background */
+  border-radius: 15px;
+  /* Rounded corners */
+  font-family: 'sans-serif';
+  font-size: 20px;
+  color: #ffffff;
+  /* White text */
+  border: none;
+  /* Removes default button border */
+  cursor: pointer;
+  /* Changes cursor on hover */
+  transition: 0.3s ease-in-out;
+  /* Smooth hover effect */
+}

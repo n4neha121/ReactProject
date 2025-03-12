@@ -82,6 +82,7 @@ const Home: FC = () => {
                     </div>
                 </div>
             </div>
+            <div className="line"></div>
             <div style={{ flexDirection: 'row', justifyContent: 'space-between', display: 'flex', flexWrap: 'wrap' }}>
                 {Makeuplist.map((item) => (
                     <Card key={item.name} name={item.name} Image={item.image} />

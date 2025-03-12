@@ -80,6 +80,7 @@
     justify-content: center;
     display: flex;
 }
+
 .headName {
     color: cadetblue;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -93,10 +94,11 @@
     font-size: 16px;
     font-weight: bold;
 }
-.inputBox{
+
+.inputBox {
     height: 35px;
     width: 240px;
-    background-color:aliceblue;
+    background-color: aliceblue;
     border: 1px solid #333;
     color: black;
     flex-direction: row;
@@ -104,4 +106,10 @@
     padding: 8px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 50px;
+}
+
+.line {
+    display: inline-block;
+    width: 100%;
+    border-top: 0.2px solid lightgray;
 }

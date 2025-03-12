@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import '../App.css'
+import '../App.css';
 import { COLORS } from '../Constants/Colors';
-import '../Css/Card.css'
+import '../Css/Card.css';
 interface ButtonProps {
     Image?: string;
     name: string;
