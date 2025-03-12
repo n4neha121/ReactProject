@@ -2,6 +2,10 @@ import { FC, useState } from "react";
 import "../Css/Home.css";
 import { COLORS } from "../Constants/Colors";
 import { useNavigate } from "react-router-dom";
+import Card from "../Components/Card";
+import { Makeuplist } from "../Constants/staticData";
+import { FaSearch } from "react-icons/fa";
+
 
 const Home: FC = () => {
     const navigate = useNavigate();
@@ -49,6 +53,39 @@ const Home: FC = () => {
                         </button>
                     ))}
                 </div>
+            </div>
+            <div style={{ flexDirection: 'row', display: 'flex' }}>
+                <div style={{ flexDirection: 'row', display: 'flex', justifyContent: 'space-between', width: '40%' }}>
+                    <h3 className="headName">NewLyyyy</h3>
+                    <p className="text">Categories</p>
+                    <div />
+                    <p className="text">Brands</p>
+                    <div />
+                    <p className="text">Luxe</p>
+                    <div />
+                    <p className="text">Fashion</p>
+                </div>
+                <div style={{ width: '60%', justifyContent: 'flex-end', display: 'flex' }}>
+                    <div style={{ justifyContent: 'flex-end' }}>
+                        <div className="inputBox">
+                            <FaSearch style={{ marginTop: '5px', height: '22px', width: '22px' }} />
+                            <textarea className="inputBox" placeholder="Search.." style={{
+                                border: 'none',
+                                outline: 'none',
+                                resize: 'none',
+                                color: COLORS.Dark,
+                                fontSize: '16px',
+                                background: 'transparent',
+                            }} />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style={{ flexDirection: 'row', justifyContent: 'space-between', display: 'flex', flexWrap: 'wrap' }}>
+                {Makeuplist.map((item) => (
+                    <Card key={item.name} name={item.name} Image={item.image} />
+                ))}
             </div>
         </div>
     );

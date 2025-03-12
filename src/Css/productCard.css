@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.productContainer {
+    background-color: rgb(234, 228, 220);
+    border: 1px solid #000;
+    border-radius: 15px;
+    padding: 5px;
+    box-shadow: 5px 5px 5px 5px rgb(234, 228, 220);
+}
