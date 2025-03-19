@@ -58,7 +58,7 @@ const Forum: FC = () => {
                         </p>
                         <div style={{ width: '55px' }} />
                     </button>
-                    <button onClick={handleClearNotes} className="buttonColor">
+                    <button onClick={handleClearNotes} style={{ all: 'unset', backgroundColor: 'rgb(240,248,255)', width: '95px', borderRadius: '10px', justifyContent: 'center', alignItems: 'center' }}>
                         <p className="buttonTxt">Clear Notes</p>
                     </button>
                 </div>

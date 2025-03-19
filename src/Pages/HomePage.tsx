@@ -5,18 +5,21 @@ import { useNavigate } from "react-router-dom";
 import Card from "../Components/Card";
 import { Makeuplist } from "../Constants/staticData";
 import { FaSearch } from "react-icons/fa";
+import { Button } from "react-bootstrap";
+import ModalComponent from "../Components/Modal";
 
 
 const Home: FC = () => {
     const navigate = useNavigate();
 
     const [isHover, setIsHover] = useState<string | null>(null);
+    const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
     const menuItems = [
         { text: "Forums", navigation: '/Forum' },
         { text: "Start Selling", navigation: '/Selling' },
         { text: "Our Products", navigation: '/Product' },
-        { text: "Sign In", navigation: '/Login' }
+        { text: "Help", navigation: '/Login' }
     ];
 
     return (
@@ -45,7 +48,9 @@ const Home: FC = () => {
                                     color: isHover === item.text ? COLORS.Dark : COLORS.InActiveBtn,
                                     fontFamily: "sans-serif",
                                     fontSize: "13.5px",
-                                    fontWeight: 'bold'
+                                    fontWeight: 'bold',
+                                    textAlign: 'center',
+                                    marginTop:'10px'
                                 }}
                             >
                                 {item.text}
@@ -56,7 +61,7 @@ const Home: FC = () => {
             </div>
             <div style={{ flexDirection: 'row', display: 'flex' }}>
                 <div style={{ flexDirection: 'row', display: 'flex', justifyContent: 'space-between', width: '40%' }}>
-                    <h3 className="headName">NewLyyyy</h3>
+                    <p className="headName">NewLyyyy</p>
                     <p className="text">Categories</p>
                     <div />
                     <p className="text">Brands</p>
@@ -65,8 +70,9 @@ const Home: FC = () => {
                     <div />
                     <p className="text">Fashion</p>
                 </div>
-                <div style={{ width: '60%', justifyContent: 'flex-end', display: 'flex' }}>
-                    <div style={{ justifyContent: 'flex-end' }}>
+                <div style={{ width: '25%' }} />
+                <div style={{ width: '60%', display: 'flex' }}>
+                    <div style={{ justifyContent: 'space-between', flexDirection: 'row', display: 'flex' }}>
                         <div className="inputBox">
                             <FaSearch style={{ marginTop: '5px', height: '22px', width: '22px' }} />
                             <textarea className="inputBox" placeholder="Search.." style={{
@@ -79,6 +85,7 @@ const Home: FC = () => {
                             }} />
 
                         </div>
+                        <Button size="sm" className="signupButton" onClick={() => setIsOpenModal(true)}>Sign In</Button>
                     </div>
                 </div>
             </div>
@@ -88,6 +95,7 @@ const Home: FC = () => {
                     <Card key={item.name} name={item.name} Image={item.image} />
                 ))}
             </div>
+            <ModalComponent modalOpen={isOpenModal} handleClose={() => setIsOpenModal(false)} title="Sign Up" />
         </div>
     );
 };
