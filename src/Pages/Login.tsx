@@ -1,13 +1,29 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import '../App.css'
 import Input from "../Components/Input";
 import Button from "../Components/Button";
+import '../Css/Login.css'
+import { useNavigate } from "react-router-dom";
 
 const Login: FC = () => {
+    const navigate = useNavigate();
     const [userName, setUserName] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [userNameError, setUserNameError] = useState<string>('');
     const [passwordError, setPasswordError] = useState<string>('');
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Enter") {
+                Submit();
+            }
+        };
+
+        document.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [userName, password]); 
     const Submit = () => {
         let isValid = true;
 
@@ -28,11 +44,12 @@ const Login: FC = () => {
         if (isValid) {
             // Proceed with submission logic (e.g., API call)
             console.log("Form submitted", { userName, password });
+            navigate('/')
         }
     };
     return (
         <div id="login">
-            <h1 className="h1">Login</h1>
+            <h1 className="h1">Sign In</h1>
             <div style={{ height: '10px' }} />
             <Input placeholder="Username" className='Input-box-background' onChange={(e) => {
                 setUserName(e.target.value)
