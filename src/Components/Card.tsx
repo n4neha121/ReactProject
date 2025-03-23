@@ -12,6 +12,7 @@ const Card: FC<ButtonProps> = ({ Image, name }) => {
             <div className='cardBg'>
                 <img src={Image} style={{ height: '100px', width: "100px", borderRadius: '50px' }} />
             </div >
+            <div style={{height:'25px'}}/>
             <p style={{ color: COLORS.Dark, fontFamily: 'serif', fontSize: '15px', textAlign: 'center' }}>{name}</p>
         </div>
     )

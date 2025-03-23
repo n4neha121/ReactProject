@@ -1,19 +1,15 @@
 #login {
   align-items: center;
-  /* Aligns items vertically */
-  justify-content: center;
-  /* Aligns items horizontally */
+  justify-content: center; 
   display: flex;
   height: 100vh;
-  /* Full page height */
   flex-direction: column;
-  /* Align items i*/
 }
 
 .h1 {
   font-family: serif;
   font-size: 30px;
-  color: black;
+  color:#ffffff;
 }
 
 /*INPUT COMPONENT STYLES*/
@@ -27,7 +23,7 @@
   /* Comfortable padding */
   font-size: 16px;
   /* Readable text */
-  border: 2px solid #000;
+  border: 2px solid #ffffff;
   /* Default border */
   border-radius: 8px;
   /* Smooth rounded corners */
@@ -45,9 +41,9 @@
   /* Centers text vertically */
   justify-content: center;
   /* Centers text horizontally */
-  background-color: #000;
+  background-color: gray;
   /* Black background */
-  border-radius: 15px;
+  /* border-radius: 15px; */
   /* Rounded corners */
   font-family: 'sans-serif';
   font-size: 20px;

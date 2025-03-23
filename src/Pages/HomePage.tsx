@@ -16,11 +16,12 @@ const Home: FC = () => {
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
     const menuItems = [
-        { text: "Forums", navigation: '/Forum' },
-        { text: "Start Selling", navigation: '/Selling' },
-        { text: "Our Products", navigation: '/Product' },
-        { text: "Help", navigation: '/Login' }
+        { text: "Forums", navigation: '/forum' },  // Change to lowercase
+        { text: "Start Selling", navigation: '/selling' },
+        { text: "Our Products", navigation: '/product' },
+        { text: "Help", action: () => setIsOpenModal(true) }
     ];
+
 
     return (
         <div>
@@ -39,8 +40,12 @@ const Home: FC = () => {
                             }}
                             onMouseLeave={() => setIsHover(null)}
                             onClick={() => {
-                                console.log('navigate to ::', item.navigation);
-                                navigate(item?.navigation)
+                                if (item.action) {
+                                    item.action();  // Call action function if available (e.g., opening modal)
+                                } else {
+                                    console.log("Navigate to ::", item.navigation);
+                                    navigate(item.navigation);  // Navigate if navigation path exists
+                                }
                             }}
                         >
                             <p
@@ -50,7 +55,7 @@ const Home: FC = () => {
                                     fontSize: "13.5px",
                                     fontWeight: 'bold',
                                     textAlign: 'center',
-                                    marginTop:'10px'
+                                    marginTop: '10px'
                                 }}
                             >
                                 {item.text}
@@ -85,11 +90,12 @@ const Home: FC = () => {
                             }} />
 
                         </div>
-                        <Button size="sm" className="signupButton" onClick={() => setIsOpenModal(true)}>Sign In</Button>
+                        <Button size="sm" className="signupButton" >Search</Button>
                     </div>
                 </div>
             </div>
             <div className="line"></div>
+            <div style={{ height: '20px' }} />
             <div style={{ flexDirection: 'row', justifyContent: 'space-between', display: 'flex', flexWrap: 'wrap' }}>
                 {Makeuplist.map((item) => (
                     <Card key={item.name} name={item.name} Image={item.image} />

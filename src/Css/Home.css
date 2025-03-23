@@ -43,7 +43,8 @@
 }
 
 .button2 {
-    all: unset; /* Rem
+    all: unset;
+    /* Rem
     height: 45px !important;
     /* min-height: 45px; */
     background-color: aliceblue !important;
@@ -72,10 +73,11 @@
 .buttonTxt {
     color: cornflowerblue !important;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
-    font-size: 12px !important;
+    font-size: 15px !important;
     text-align: center !important;
     align-self: center !important;
     font-weight: bold !important;
+    margin-top: 10px;
 }
 
 .buttonColor {
@@ -85,8 +87,9 @@
     width: 100px !important;
     align-items: center !important;
     justify-content: center !important;
-    display: flex !important;
+    /* display: flex !important; */
     text-align: center !important;
+    border-radius: 15px;
 }
 
 .headName {
