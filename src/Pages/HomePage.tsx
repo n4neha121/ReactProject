@@ -21,7 +21,7 @@ const Home: FC = () => {
         { text: "Forums", navigation: '/forum' },  // Change to lowercase
         { text: "Start Selling", navigation: '/selling' },
         { text: "Our Products", navigation: '/product' },
-        { text: "Help", action: () => setIsOpenModal(true) }
+        { text: "Help", navigation: '/help'  }
     ];
 
     const handleLogout = () => {
