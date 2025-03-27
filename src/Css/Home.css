@@ -141,3 +141,23 @@
     margin-left: 15px;
     border-color: #000;
 }
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+/* Centers modal below the icon */
+.top-full {
+    top: 100%;
+}
+
+.left-1\/2 {
+    left: 50%;
+}
+
+.transform {
+    transform: translateX(-50%);
+}

@@ -5,3 +5,23 @@
     justify-content: center;
     display: flex; */
 }
+
+.buttonContainer {
+    height: 60px;
+    width: 140px;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    align-self: center;
+    border-radius: 10px;
+    text-align: center; /* Ensures text is centered */
+
+}
+.modalTxt {
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    
+}

@@ -7,6 +7,8 @@ import { Makeuplist } from "../Constants/staticData";
 import { FaSearch } from "react-icons/fa";
 import { Button } from "react-bootstrap";
 import ModalComponent from "../Components/Modal";
+import { FaUserCircle } from "react-icons/fa";
+
 
 
 const Home: FC = () => {
@@ -22,7 +24,11 @@ const Home: FC = () => {
         { text: "Help", action: () => setIsOpenModal(true) }
     ];
 
-
+    const handleLogout = () => {
+        localStorage.removeItem('user');
+        setIsOpenModal(false);
+        navigate('/');
+    }
     return (
         <div>
             <div className="headerbg">
@@ -92,6 +98,10 @@ const Home: FC = () => {
                         </div>
                         <Button size="sm" className="signupButton" >Search</Button>
                     </div>
+                    <div style={{ width: '180px' }} />
+                    <div onClick={() => setIsOpenModal(true)} style={{ marginTop: -5 }}>
+                        <FaUserCircle style={{ height: '55px', width: '55px' }} />
+                    </div>
                 </div>
             </div>
             <div className="line"></div>
@@ -101,7 +111,7 @@ const Home: FC = () => {
                     <Card key={item.name} name={item.name} Image={item.image} />
                 ))}
             </div>
-            <ModalComponent modalOpen={isOpenModal} handleClose={() => setIsOpenModal(false)} title="Sign Up" />
+            <ModalComponent modalOpen={isOpenModal} handleClose={() => setIsOpenModal(false)} title="Logout" handleLogout={handleLogout} />
         </div>
     );
 };

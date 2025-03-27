@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import '../Css/All.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,10 +8,12 @@ interface modalProps {
     modalOpen: boolean;
     title: string;
     handleClose: () => void;
+    handleLogout: () => void;
 }
 const ModalComponent: FC<modalProps> = ({
-    modalOpen, title, handleClose
+    modalOpen, title, handleClose, handleLogout
 }) => {
+
     return (
         <>
             <Modal
@@ -27,15 +28,11 @@ const ModalComponent: FC<modalProps> = ({
                     <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    I will not close if you click outside me. Do not even try to press
-                    escape key.
+                    <div className='buttonContainer' onClick={handleLogout}>
+                        <div style={{ height: '15px' }} />
+                        <p className='modalTxt'>Logout</p>
+                    </div>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    {/* <Button variant="primary">Understood</Button> */}
-                </Modal.Footer>
             </Modal>
         </>
     )
