@@ -141,6 +141,7 @@
     margin-left: 15px;
     border-color: #000;
 }
+
 .relative {
     position: relative;
 }
@@ -160,4 +161,29 @@
 
 .transform {
     transform: translateX(-50%);
+}
+
+.middleContainer {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.middleTxt {
+    color: #000;
+    font-size: 25px;
+    font-style: italic;
+}
+
+.intoTxt {
+    color: #000;
+    font-size: 18px;
+    font-style: italic;
+}
+
+text {
+    color: #000;
+    font-size: 18px;
+    font-style: italic;
 }

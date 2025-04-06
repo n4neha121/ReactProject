@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import '../Css/Home.css';
 import { Icons } from "../Constants";
-const Forum: FC = () => {
+const AboutUs: FC = () => {
     const [note, setNote] = useState<string>("");
     const [notes, setNotes] = useState<string[]>([]);
 
@@ -75,4 +75,4 @@ const Forum: FC = () => {
 
 
 
-export default Forum;
+export default AboutUs;

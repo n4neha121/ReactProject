@@ -1,48 +1,37 @@
-import { FC, ChangeEvent, ReactNode } from "react";
+import { FC, ChangeEvent } from "react";
 import "../Css/All.css";
 
-interface InputProps {
-    type?: string;
-    placeholder?: string;
+interface DateInputProps {
     value?: string;
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
     required?: boolean;
     disabled?: boolean;
+    readOnly?: boolean; // ✅ Corrected type
     className?: string;
-    icon?: ReactNode; // Pass JSX element
-    onIconClick?: () => void;
 }
 
-const Input: FC<InputProps> = ({
-    type = "text",
-    placeholder,
+const DateInput: FC<DateInputProps> = ({
     value,
     onChange,
     required = false,
     disabled = false,
+    readOnly = false,
     className = "",
-    icon,
-    onIconClick
 }) => {
     return (
         <div className={`input-wrapper ${className}`}>
             <input
-                type={type}
-                placeholder={placeholder}
+                type="date"
                 value={value}
                 onChange={onChange}
                 required={required}
                 disabled={disabled}
+                readOnly={readOnly}
                 className="custom-input"
                 autoComplete="off"
             />
-            {icon && (
-                <div className="input-icon" onClick={onIconClick}>
-                    {icon}
-                </div>
-            )}
         </div>
     );
 };
 
-export default Input;
+export default DateInput;

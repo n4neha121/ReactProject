@@ -1,0 +1,52 @@
+.profileBg {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.image {
+    height: 120px;
+    width: 120px;
+}
+
+.text {
+    color: black;
+    font-size: 14px;
+    font-family: sans-serif;
+}
+
+.error-text {
+    color: red;
+    font-size: 14px;
+    font-family: sans-serif;
+}
+
+/* Container for heading and edit icon */
+.heading-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+/* Heading text */
+.heading {
+    font-size: 25px;
+    font-weight: bold;
+    color: #000;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+/* Edit icon next to heading */
+.edit-icon {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    transition: transform 0.2s ease;
+}
+
+.edit-icon:hover {
+    transform: scale(1.1);
+}
