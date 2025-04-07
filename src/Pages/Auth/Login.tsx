@@ -5,9 +5,10 @@ import Button from "../../Components/Button";
 import '../../Css/Login.css'
 import { useNavigate } from "react-router-dom";
 import bgImage from "../../assets/backgroundImg.jpg"; // Import the image
-import { showError, showSuccess } from "../../Components/toast";
-import { API } from "../../utils/api";
+// import { showError, showSuccess } from "../../Components/toast";
+import { API, setToken } from "../../utils/api";
 import ENDPOINTS from "../../utils/Endpoints";
+import axios from "axios";
 
 
 const Login: FC = () => {
@@ -29,6 +30,8 @@ const Login: FC = () => {
         passwordError: ''
     });
     // const [loginUser, setLoginUser] = useState<unknown>(null);
+    // n4n5eha.0@gmail.com
+    // 123456789
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key === "Enter") {
@@ -78,14 +81,21 @@ const Login: FC = () => {
                     email: email,
                     password: password,
                 };
+                console.log("payload", payload);
 
-                const res = await API.post(ENDPOINTS.LOGIN, payload);
-                console.log("Login successful:", res);
-                showSuccess('user Logged In successfully!')
-                navigate('/Home'); // Replace with your route
+                const response = await axios.post(
+                    "http://ec2-13-233-128-152.ap-south-1.compute.amazonaws.com:5000/api/auth/login",
+                    payload,
+
+                );
+                console.log("✅ Login successful:", response);
+                setToken(response.data.token);
+                setUser(response.data.user); // Store user in context
+                alert("Login Successful");
+                navigate("/");
             } catch (error) {
-                console.error(" Registration error:", error);
-                showError("Registration failed. Please try again.");
+                console.error("❌ Login error:", error);
+                alert("Login failed. Please try again.");
             }
         }
     };
@@ -115,3 +125,7 @@ const Login: FC = () => {
 };
 
 export default Login;
+function setUser(user: any) {
+    throw new Error("Function not implemented.");
+}
+

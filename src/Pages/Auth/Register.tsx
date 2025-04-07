@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import '../../Css/All.css'
 import Input from '../../Components/Input';
 import { COLORS } from '../../Constants/Colors';
@@ -7,7 +7,7 @@ import { Icons } from '../../Constants';
 import { API } from '../../utils/api';
 import ENDPOINTS from '../../utils/Endpoints';
 import { useNavigate } from 'react-router-dom';
-import { showError, showSuccess } from '../../Components/toast';
+import axios from 'axios';
 
 const Register: FC = () => {
     const navigate = useNavigate();
@@ -20,6 +20,20 @@ const Register: FC = () => {
         passwordError: ''
     });
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Enter") {
+                handleSubmit();
+            }
+        };
+
+        document.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [email, password]);
     const regEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     const Validation = () => {
@@ -66,18 +80,23 @@ const Register: FC = () => {
         if (Validation()) {
             try {
                 const payload = {
-                    name: username,
+                    username: username, // correct key
                     email: email,
                     password: password,
                 };
+                console.log("payload", payload);
 
-                const res = await API.post(ENDPOINTS.REGISTER, payload);
-                console.log("Registration successful:", res);
-                showSuccess('user registered successfully!')
-                navigate('/Home'); // Replace with your route
+                const response = await axios.post(
+                    "http://ec2-13-233-128-152.ap-south-1.compute.amazonaws.com:5000/api/auth/register",
+                    payload,
+
+                );
+                console.log("✅ Registration successful:", response);
+                alert("Registration Successful");
+                navigate("/Login");
             } catch (error) {
-                console.error(" Registration error:", error);
-                showError("Registration failed. Please try again.");
+                console.error("❌ Registration error:", error);
+                alert("Registration failed. Please try again.");
             }
         }
     };
@@ -93,6 +112,7 @@ const Register: FC = () => {
                     onChange={(e) => setUserName(e.target.value)}
                     value={username}
                     required={true}
+                    type='text'
                 />
                 <p style={{ fontSize: '15px', color: 'red', fontStyle: 'normal', fontFamily: 'sans-serif' }}>{error.usernameError}</p>
                 <div style={{ height: "10px" }} />
@@ -103,7 +123,7 @@ const Register: FC = () => {
                     value={email}
                     required={true}
                     icon={<img src={Icons.email} alt="email icon" height={20} />}
-
+                    type='text'
                 />
                 <p style={{ fontSize: '15px', color: 'red', fontStyle: 'normal', fontFamily: 'sans-serif' }}>{error.emailError}</p>
                 <div style={{ height: "10px" }} />
@@ -133,4 +153,8 @@ const Register: FC = () => {
 }
 
 export default Register;
+
+function post(REGISTER: string, payload: { name: string; email: string; password: string; }) {
+    throw new Error('Function not implemented.');
+}
 

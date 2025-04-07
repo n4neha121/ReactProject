@@ -14,7 +14,7 @@ const Home: FC = () => {
 
     const menuItems = [
         { text: "Home", navigation: '/' },  // Change to lowercase
-        { text: "aboutUs", navigation: '/' },
+        { text: "Login", navigation: 'Login' },
         { text: "Register", navigation: '/Register' },
         { text: "Profile", navigation: '/Profile' }
     ];
