@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import '../../App.css'
 import Input from "../../Components/Input";
 import Button from "../../Components/Button";
@@ -9,6 +9,8 @@ import bgImage from "../../assets/backgroundImg.jpg"; // Import the image
 import { API, setToken } from "../../utils/api";
 import ENDPOINTS from "../../utils/Endpoints";
 import axios from "axios";
+import { useUser } from "../../contexts/UserContext";
+import { saveTokenToStorage } from "../../utils/storage";
 
 
 const Login: FC = () => {
@@ -23,6 +25,7 @@ const Login: FC = () => {
         width: "100%",
     };
     const navigate = useNavigate();
+    const { setUser } = useUser(); // 👈 use context here
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [error, setError] = useState({
@@ -83,16 +86,16 @@ const Login: FC = () => {
                 };
                 console.log("payload", payload);
 
-                const response = await axios.post(
-                    "http://ec2-13-233-128-152.ap-south-1.compute.amazonaws.com:5000/api/auth/login",
+                const response: any = await API.post(
+                    ENDPOINTS.LOGIN,
                     payload,
-
                 );
                 console.log("✅ Login successful:", response);
-                setToken(response.data.token);
-                setUser(response.data.user); // Store user in context
                 alert("Login Successful");
-                navigate("/");
+                setToken(response.token);
+                saveTokenToStorage(response.token);
+                setUser(response.user);
+                navigate("/Profile");
             } catch (error) {
                 console.error("❌ Login error:", error);
                 alert("Login failed. Please try again.");
@@ -125,7 +128,5 @@ const Login: FC = () => {
 };
 
 export default Login;
-function setUser(user: any) {
-    throw new Error("Function not implemented.");
-}
+
 

@@ -18,8 +18,7 @@ const Routings = () => {
             <Route index element={<Home />} />
             <Route path="Login" element={<Login />} />
             <Route path="Register" element={<Register />} />
-            <Route path="Profile" element={<Profile />} />
-            {/* <Route path="home" element={<PrivateRoute element={<Home />} />} /> */}
+            <Route path="Profile" element={<PrivateRoute element={<Profile />} />} />
             <Route path="aboutUs" element={<PrivateRoute element={<AboutUs />} />} />
             <Route path="contact" element={<PrivateRoute element={<Contacts />} />} />
             <Route path="privacy" element={<PrivateRoute element={<PrivacyPolicy />} />} />

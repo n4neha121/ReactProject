@@ -1,14 +1,7 @@
 // src/utils/api.ts
 import axios, { AxiosError } from "axios";
-
-export const setToken = (token: string) => {
-  API.defaults.headers.common.Authorization = `Bearer ${token}`;
-  return true;
-};
-
-export const removeToken = () => {
-  localStorage.removeItem("token");
-};
+import config from "../Config/config";
+import { removeTokenFromStorage, saveTokenToStorage } from "./storage";
 
 // Optional manual navigate (fallback)
 const navigate = (route: string) => {
@@ -17,28 +10,27 @@ const navigate = (route: string) => {
 
 // Axios Instance
 export const API = axios.create({
-  baseURL: "", // Set your base URL here (e.g., import from config)
+  baseURL: config.BASE_URL, // Set your base URL here (e.g., import from config)
   headers: {
     "Content-Type": "application/json",
-    "Accept-Language": "en",
   },
-  timeout: 30000,
 });
+export const setToken = (token: string) => {
+  console.log("token", token);
 
+  API.defaults.headers.common.Authorization = `Bearer ${token}`;
+  return true;
+};
 // Response Interceptor
 API.interceptors.response.use(
   function (response) {
     console.log(`✅ RES of ${response?.config?.url || ""}:`, response);
 
-    if (response.data?.success) {
-      if (import.meta.env.DEV && response?.data?.message) {
-        console.log(response?.data?.message);
-      }
-
+    if (response?.status === 200) {
       return response.data;
     } else {
-      if (response?.data?.message) {
-        console.log(response?.data?.message);
+      if (response?.data?.msg) {
+        console.log(response?.data?.msg);
 
         // showError(response.data.message);
       }
@@ -47,13 +39,13 @@ API.interceptors.response.use(
   },
   async function (error: AxiosError) {
     const message =
-      error.response?.data?.message || error.message || "Something went wrong";
+      error.response?.data?.msg || error.message || "Something went wrong";
 
     console.log(message);
 
     if (error.response?.status === 401) {
-      setToken("");
-      removeToken();
+      saveTokenToStorage("");
+      removeTokenFromStorage();
       navigate("login");
     }
 

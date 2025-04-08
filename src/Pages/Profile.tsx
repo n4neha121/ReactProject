@@ -1,33 +1,53 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Icons, Images } from '../Constants';
 import Input from '../Components/Input';
 import { useNavigate } from 'react-router-dom';
 import DateInput from '../Components/DateInput';
-import { API } from '../utils/api';
+import { API, setToken } from '../utils/api';
 import ENDPOINTS from '../utils/Endpoints';
 import Button from '../Components/Button';
 import '../Css/profile.css';
 import axios from 'axios';
 import '../Css/All.css'
 import { COLORS } from '../Constants/Colors';
+import { useUser } from '../contexts/UserContext';
+import { getToken, saveTokenToStorage } from '../utils/storage';
 
 const Profile: FC = () => {
     const [name, setName] = useState<string>('');
     const [dob, setDob] = useState<string>('');
     const [nameError, setNameError] = useState<string>('');
     const [dobError, setDobError] = useState<string>('');
-    const [isEdit, setIsEdit] = useState<boolean>(false);
-    const { user } = useUser(); // 👈 use context here
-
-
+    const [profileName, setProfileName] = useState<string>('');
+    const [profileDob, setProfileDob] = useState<string>('');
+    const [isEditProfile, setIsEditProfile] = useState<boolean>(false);
+    const { user, setUser } = useUser(); // 👈 use context here
     const navigate = useNavigate();
+    const userId = user?._id
     const menuItems = [
         { text: "Home", navigation: '/' },  // Change to lowercase
         { text: "Login", navigation: '/Login' },
         { text: "Register", navigation: '/Register' },
         { text: "Profile", navigation: '/Profile' }
     ];
+    useEffect(() => {
+        if (userId) {
+            getProfileDetails();
+        }
+    }, [userId])
 
+    const getProfileDetails = async () => {
+        try {
+            const res = await API.get(ENDPOINTS.GET_PROFILE(userId));
+            console.log("✅ Profile retrieved:3", res?.profileData);
+            setProfileName(res?.profileData?.name);
+            setProfileDob(res?.profileData?.dob);
+            alert("Profile retrieved Successfully!");
+        } catch (error) {
+            console.error("Profile fetch error:", error);
+            alert("Failed to fetch profile.");
+        }
+    };
     const Validation = () => {
         let isValid = true;
         setNameError('');
@@ -49,41 +69,41 @@ const Profile: FC = () => {
         return isValid;
     };
 
+
     const CreateProfile = async () => {
         if (Validation()) {
             try {
                 const payload = {
-                    name: name,
-                    dob: dob,
+                    userId: user?._id, // You might want to get this from context or localStorage
+                    profileData: {
+                        name: name,
+                        dob: dob,
+                    },
                 };
+
                 console.log("payload", payload);
 
-                const response = await axios.post(
-                    "http://ec2-13-233-128-152.ap-south-1.compute.amazonaws.com:5000/api/auth/profile/create",
-                    payload,
-
-                );
+                const response = await API.post(ENDPOINTS.CREATE_PROFILE, payload);
                 console.log("✅ Profile Created successful:", response);
                 alert("Profile Created Successful");
-                navigate("/Login");
+                setIsEditProfile(false);
+                getProfileDetails();
+                // navigate("/Login");
             } catch (error) {
-                console.error(" Profile error:", error);
+                console.error("❌ Profile error:", error);
                 alert("Profile failed. Please try again.");
             }
         }
     };
 
-    // const getProfileDetails = async () => {
-    //     try {
-    //         const res = await API.post(ENDPOINTS.REGISTER, userId);
-    //         console.log('Registration successful:', res);
-    //         // showSuccess('User registered successfully!');
-    //         navigate('/Home');
-    //     } catch (error) {
-    //         console.error('Registration error:', error);
-    //         // showError('Registration failed. Please try again.');
-    //     }
-    // };
+    const Logout = () => {
+        saveTokenToStorage('');
+        setToken('');
+        setUser(null);
+        navigate('/');
+    }
+
+    console.log('profileName', profileName);
 
     return (
         <div>
@@ -115,11 +135,46 @@ const Profile: FC = () => {
             </div>
             <div className="profileBg">
                 <div className='middleContainer'>
-                    {/* <div style={{ alignItems: 'center', justifyContent: 'center', display: 'flex', flexDirection: 'column' }}>
+                    {isEditProfile === false && <div className='shadowCard'>
+                        <div style={{ flexDirection: 'row', display: 'flex' }}>
+                            <div>
+                                <img src={Images.profile} alt="profile" style={{ height: '60px', width: '60px', borderRadius: '45px' }} />
+                            </div>
+                            <div style={{ width: '5px' }} />
+                            <div>
+                                {profileName && <p style={{ color: COLORS.Dark, fontFamily: 'sans-serif', fontSize: '14px', fontStyle: 'italic', fontWeight: 'bold' }}>Name: {profileName}</p>
+                                }<p style={{ color: COLORS.Dark, fontFamily: 'sans-serif', fontSize: '14px' }}>Username: {user?.username}</p>
+                                <p style={{ color: COLORS.Dark, fontFamily: 'sans-serif', fontSize: '14px' }}>Email :{user?.email}</p>
+                                {profileDob && <p style={{ color: COLORS.Dark, fontFamily: 'sans-serif', fontSize: '14px' }}>Date of Birth :{profileDob}</p>}
+                            </div>
+                        </div>
+                        <div style={{ flexDirection: 'row', display: 'flex', justifyContent: 'space-between' }}>
+                            <div style={{ backgroundColor: COLORS.Dark, height: '30px', width: '80px', alignItems: 'center', justifyContent: 'center', alignSelf: 'center' }}>
+                                <p style={{
+                                    color: COLORS.Light, fontFamily: 'sans-serif', fontSize: '12px',
+                                    fontWeight: 'bold', textAlign: 'center',
+                                    padding: 9
+                                }} onClick={() => {
+                                    Logout();
+                                    navigate('/')
+                                }}>Logout</p>
+                            </div>
+                            <div style={{ width: '5px' }} />
+                            <div style={{ backgroundColor: COLORS.Dark, height: '30px', width: '80px', alignItems: 'center', justifyContent: 'center', alignSelf: 'center' }}>
+                                <p style={{
+                                    color: COLORS.Light, fontFamily: 'sans-serif', fontSize: '12px',
+                                    fontWeight: 'bold', textAlign: 'center',
+                                    padding: 8
+                                }} onClick={() => {
+                                    setIsEditProfile(true);
+                                }}>Edit Profile</p>
+                            </div>
+                        </div>
+                    </div>}
+                    {isEditProfile === true && <div style={{ alignItems: 'center', justifyContent: 'center', display: 'flex', flexDirection: 'column', alignSelf: 'center' }}>
                         <h1 className="heading">Edit Profile</h1>
                         <img src={Images.profile} alt="profile" style={{ height: '120px', width: '120px' }} />
                         <div style={{ height: '10px' }} />
-
                         <Input
                             placeholder="Username"
                             className="Input-box-background"
@@ -129,7 +184,7 @@ const Profile: FC = () => {
                         />
                         {nameError && <p className="error-text">{nameError}</p>}
 
-                        <div style={{ height: '10px' }} />
+                        <div style={{ height: '3px' }} />
 
                         <DateInput
                             value={dob}
@@ -139,9 +194,9 @@ const Profile: FC = () => {
                         />
                         {dobError && <p className="error-text">{dobError}</p>}
 
-                        <div style={{ height: '20px' }} />
+                        <div style={{ height: '10px' }} />
                         <Button title="Save" onclick={CreateProfile} />
-                    </div> */}
+                    </div>}
                 </div>
             </div>
             <div className="bottomBg">

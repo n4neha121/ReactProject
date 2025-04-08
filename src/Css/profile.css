@@ -86,4 +86,19 @@
 
 .middleContainer {
     background-color: #fff;
+    align-self:center;
+    justify-content: center;
+}
+
+.shadowCard {
+    background-color: #fff;
+    /* border-radius: 16px; */
+    padding: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    max-width: 400px;
+    margin: auto;
+    flex-direction: column;
 }

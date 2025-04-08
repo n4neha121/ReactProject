@@ -33,8 +33,8 @@
 }
 
 .button {
-  height: 55px;
-  width: 320px;
+  height: 45px;
+  width: 250px;
   display: flex;
   /* Needed for align-items & justify-content */
   align-items: center;
